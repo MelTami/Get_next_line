@@ -6,7 +6,7 @@
 #    By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 19:32:35 by mvavasso          #+#    #+#              #
-#    Updated: 2022/05/12 16:30:22 by mvavasso         ###   ########.fr        #
+#    Updated: 2022/05/12 21:23:52 by mvavasso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
 $(OBJS): $(SRCS)
-	$(CC) $(CFLAG) $(HEADER) -c $(SRCS)
+	$(CC) $(CFLAG) -c $(SRCS)
 
 clean:
 		$(RM) $(OBJS)
