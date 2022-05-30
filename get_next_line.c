@@ -6,11 +6,20 @@
 /*   By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:45:10 by mvavasso          #+#    #+#             */
-/*   Updated: 2022/05/13 03:54:01 by mvavasso         ###   ########.fr       */
+/*   Updated: 2022/05/30 20:57:36 by mvavasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	ft_free(char **str)
+{
+	if (str[0])
+	{
+		free(str[0]);
+		str[0] = NULL;
+	}
+}
 
 char	*another_split(char **str)
 {
@@ -24,15 +33,15 @@ char	*another_split(char **str)
 	while (str[0][i] != '\0' && str[0][i] != '\n')
 		i++;
 	line = ft_substr(str[0], 0, i + 1);
-	temp = ft_substr(str[0], i + 2, ft_strlen(str[0]));
-	free(str[0]);
-	str[0] = ft_strdup(temp);
-	if (str[0][i + 1] != '\n')
+	temp = ft_strdup(str[0]);
+	ft_free(str);
+	str[0] = ft_substr(temp, i + 1, ft_strlen(temp));
+	ft_free(&temp);
+	if (!(ft_strchr(line, '\n')))
 	{
-		free(str[0]);
-		str[0] = NULL;
+		ft_free(str);
 		if (!ft_strlen(line))
-			free(line);
+			ft_free(&line);
 	}
 	return (line);
 }
@@ -54,29 +63,12 @@ char	*get_next_line(int fd)
 		else
 		{
 			temp = ft_strjoin(s_line, str);
-			free(s_line);
+			ft_free(&s_line);
 			s_line = temp;
 		}
 		if (ft_strchr(s_line, '\n'))
 			break ;
 		fread = read(fd, str, BUFFER_SIZE);
 	}
-	return (free(str), another_split(&s_line));
-}
-
-#include <stdio.h>
-#include <fcntl.h>
-
-int	main(void)
-{
-	char	*result = "oi";
-	int		fd;
-	
-	fd = open("file", O_RDONLY);
-	while (result)
-	{
-		result = get_next_line(fd);
-		printf("%s", result);
-	}
-	return (0);
+	return (ft_free(&str), another_split(&s_line));
 }
