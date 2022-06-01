@@ -6,7 +6,7 @@
 /*   By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:45:10 by mvavasso          #+#    #+#             */
-/*   Updated: 2022/05/30 21:22:29 by mvavasso         ###   ########.fr       */
+/*   Updated: 2022/06/01 23:28:17 by mvavasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*get_next_line(int fd)
 	static char	*s_line;
 	char		*temp;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	str = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	fread = read(fd, str, BUFFER_SIZE);
 	while (fread > 0)

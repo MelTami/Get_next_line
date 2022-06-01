@@ -6,7 +6,7 @@
 /*   By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:14:58 by mvavasso          #+#    #+#             */
-/*   Updated: 2022/05/13 00:32:02 by mvavasso         ###   ########.fr       */
+/*   Updated: 2022/06/01 23:32:31 by mvavasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ char	*ft_strdup(char *src)
 	char	*dup;
 	int		i;
 
-	i = ft_strlen(src) + 1;
-	dup = (char *) malloc(i * sizeof(char));
+	i = ft_strlen(src);
+	dup = (char *) malloc((i + 1) * sizeof(char));
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -60,8 +60,8 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	aux = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = malloc(size * sizeof(char));
+	size = ft_strlen(s1) + ft_strlen(s2);
+	str = malloc((size + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	while (s1[i])
@@ -83,18 +83,20 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*substr;
 	size_t	i;
 	size_t	tsize;
+	size_t	ssize;
 
 	i = 0;
-	if (start >= ft_strlen(s))
+	ssize = ft_strlen(s);
+	if (start >= ssize)
 		tsize = 1;
-	else if (len >= ft_strlen(s))
-		tsize = ft_strlen(s) - start + 1;
+	else if (len >= ssize)
+		tsize = ssize - start + 1;
 	else
 		tsize = len + 1;
 	substr = malloc(tsize);
 	if (!substr)
 		return (NULL);
-	while ((start < ft_strlen(s)) && (i < len))
+	while ((start < ssize) && (i < len))
 	{
 		substr[i] = s[start];
 		i++;
