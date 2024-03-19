@@ -24,7 +24,7 @@
 
 ## Badge
 <!-- ![GetNextLine score](https://github.com/MelTami) -->
-![GetNextLine achiviment](https://github.com/MelTami/Libft/blob/master/img/gnl.png)
+![GetNextLine achiviment](https://github.com/MelTami/Get_next_line/blob/master/img/gnl.png)
 
 ---
 
